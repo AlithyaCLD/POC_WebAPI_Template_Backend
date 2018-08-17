@@ -7,14 +7,14 @@ namespace Tr_Api.Models
 {
     public class ApiMessage
     {
-        public string Message { get; set; }
+        public string Content { get; set; }
         public ApiMessage()
         {
-            this.Message = "";
+            this.Content = "";
         }
-        public ApiMessage(string message)
+        public ApiMessage(string content)
         {
-            this.Message = message ?? "";
+            this.Content = content ?? "";
         }
     }
 }

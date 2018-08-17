@@ -16,7 +16,7 @@ namespace DataService
         }
         public TemplateModel Get(int id)
         {
-            if (id>5)
+            if (id > 5)
             {
                 throw new KeyNotFoundException();
             }

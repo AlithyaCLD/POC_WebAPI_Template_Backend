@@ -4,21 +4,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
-using Tr_Api.Models;
+//using Tr_Api.Models;
 
 
 
 namespace Tr_Api.Services
 {
     public class HttpValidationModule : IHttpModule
-    {
-        private Controllers.ResponseController responseController;
+    {        
         private RequestValidation requestValidation;
         HttpApplication app;
         public HttpValidationModule()
         {
-            requestValidation = new RequestValidation();
-            responseController = new Controllers.ResponseController();
+            requestValidation = new RequestValidation();            
         }
         public void Dispose()
         {

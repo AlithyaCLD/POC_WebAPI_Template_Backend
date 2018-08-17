@@ -7,56 +7,51 @@ using System.Web.Http;
 using DataService;
 using DataService.Models;
 using Tr_Api.Models;
+using Tr_Api.Services;
 
 namespace Tr_Api.Controllers
 {
-    public class TemplateController : ApiController
+    public class TemplateController : ResponseController
     {
         private DataService.DataService dataService;
         public TemplateController()
         {
             dataService = new DataService.DataService();
         }
-        // GET api/<controller>
+        [Route("api/template")]
         public IHttpActionResult Get()
-        {
-            var acceptLanguage = Request.Headers.AcceptLanguage;
+        {            
             var UserList = dataService.Get();
 
-            //return Json(new Response(UserList));
-            return Json(new { StatusCode = HttpStatusCode.OK,  UserList = dataService.Get() } );
-            //return Json(new Response(dataService.Get()));
+            return base.GetResponse(UserList);            
         }
-        // GET api/<controller>/5
+        [Route("api/template/{id}")]
         public IHttpActionResult Get(int id)
         {
             var model = dataService.Get(id);
-            return Json(new Response(model));
 
-
-
-
-            /*try
-            {                
-                var model = dataService.Get(id);
-                return Json(new Response(model));
-                //return Json(new Response(HttpStatusCode.OK, model));                
-            }
-            catch (System.Exception ex)
+            try
             {
-                var exception = new Models.ApiMessage();
-                exception.Message = ex.Message + " any custom/user friendly message?";
-                return Json(new Response(HttpStatusCode.NotFound, exception));
-                //return Json(new Response(new Models.Exception("cannot get a user")));
-                //return Json(new Response(HttpStatusCode.BadRequest, new Models.Exception("cannot get a user")));                
-            } */           
+                return base.GetResponse(model);
+            }
+            catch (Exception ex)
+            {
+                return base.GetResponse(Helpers.HandleException(ex), HttpStatusCode.InternalServerError);
+            }
         }
         [Route("api/menu")]
         public IHttpActionResult GetAvailablePeriods()
         {
             var periods = dataService.GetAvailablePeriods();
 
-            return Json(new Response(periods));            
+            return base.GetResponse(periods);            
+        }
+        [Route("api/accept")]
+        public IHttpActionResult GetAcceptLanguage()
+        {
+            //var acceptLanguage = Helpers.GetAcceptLanguage(Request.Headers.AcceptLanguage);
+
+            return base.GetResponse(new ApiMessage(base.AcceptLanguage), HttpStatusCode.BadRequest);
         }
         // POST api/<controller>
         public void Post([FromBody]string value)
