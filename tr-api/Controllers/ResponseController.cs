@@ -16,6 +16,12 @@ namespace Tr_Api.Controllers
         public ResponseController()
         {
         }
+        /// <summary>
+        /// Send a json response to the client by modifying the response status code
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="statusCode"></param>
+        /// <returns></returns>
         public IHttpActionResult GetResponse(object content, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             var responseMessage = new HttpResponseMessage(statusCode);

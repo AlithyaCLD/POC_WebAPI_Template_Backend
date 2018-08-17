@@ -160,6 +160,7 @@
     <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Models\ApiMessage.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Services\Helpers.cs" />
     <Compile Include="Services\TrExceptionHandler.cs" />
     <Compile Include="Global.asax.cs">

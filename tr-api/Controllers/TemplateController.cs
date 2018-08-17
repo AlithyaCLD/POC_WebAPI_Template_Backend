@@ -32,11 +32,16 @@ namespace Tr_Api.Controllers
 
             try
             {
+                //return Json(new Response(HttpStatusCode.BadRequest, model));
                 return base.GetResponse(model);
+                //return Json(new { Code = 200, ErrorMessage = "Could not retrieve template." });
             }
             catch (Exception ex)
             {
-                return base.GetResponse(Helpers.HandleException(ex), HttpStatusCode.InternalServerError);
+                 return base.GetResponse(Helpers.HandleException(ex), HttpStatusCode.InternalServerError);
+
+                //return Json(new { Code = 500, ErrorMessage = "Could not retrieve template." });
+
             }
         }
         [Route("api/menu")]
