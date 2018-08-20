@@ -11,9 +11,19 @@ namespace Tr_Api.Services
         }
         public override void Handle(ExceptionHandlerContext context)
         {
-            var exception = context.Exception;            
-            context.Result = new ResponseMessage("any error message...", System.Net.HttpStatusCode.InternalServerError, context.Request);
+            var exception = context.Exception;
+
+            var exceptionMessage = new ExceptionMessage();
+            exceptionMessage.Message = exception.Message;
+            exceptionMessage.StackTrace = exception.StackTrace;
+
+            context.Result = new ResponseMessage(exceptionMessage, System.Net.HttpStatusCode.InternalServerError, context.Request);
             //import a logger and log the exception ?
-        }        
+        }
+        private class ExceptionMessage
+        {
+            public string Message { get; set; }
+            public string StackTrace { get; set; }
+        }
     }
 }

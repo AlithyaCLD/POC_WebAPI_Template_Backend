@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using DataService;
-using DataService.Models;
 using Tr_Api.Models;
 using Tr_Api.Services;
 
@@ -13,10 +9,10 @@ namespace Tr_Api.Controllers
 {
     public class TemplateController : ApiController
     {
-        private DataService.DataService dataService;
+        private TemplateService dataService;
         public TemplateController()
         {
-            dataService = new DataService.DataService();
+            dataService = new DataService.TemplateService();
         }
         [Route("api/template")]
         public IHttpActionResult Get()
@@ -31,21 +27,7 @@ namespace Tr_Api.Controllers
         {
             var model = dataService.Get(id);
 
-            try
-            {
-                return new ResponseMessage(model, HttpStatusCode.Created, Request);
-
-                //return Json(new Response(HttpStatusCode.BadRequest, model));
-                //return base.GetResponse(model);
-                //return Json(new { Code = 200, ErrorMessage = "Could not retrieve template." });
-            }
-            catch (Exception ex)
-            {
-                return new ResponseMessage(Helpers.HandleException(ex), HttpStatusCode.InternalServerError, Request);
-
-                return Json(new { Code = 500, ErrorMessage = "Could not retrieve template." });
-
-            }
+            return new ResponseMessage(model, HttpStatusCode.Created, Request);
         }
         [Route("api/menu")]
         public IHttpActionResult GetAvailablePeriods()

@@ -14,12 +14,20 @@ namespace Tr_Api.Models
         private HttpRequestMessage requestMessage;
         public ResponseMessage(object body, HttpStatusCode statusCode, HttpRequestMessage request)
         {
+            if (request == null)
+            {
+                throw new ArgumentException("request cannot be null");
+            }
             this.StatusCode = statusCode;
             this.Body = body;
             this.requestMessage = request;
         }
         public ResponseMessage(object body, HttpRequestMessage request)
         {
+            if (request == null)
+            {
+                throw new ArgumentException("request cannot be null");
+            }
             this.Body = body;
             this.StatusCode = HttpStatusCode.OK;
             this.requestMessage = request;

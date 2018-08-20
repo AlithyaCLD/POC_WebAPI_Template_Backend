@@ -7,15 +7,20 @@ using DataService.Models;
 
 namespace DataService
 {
-    public class DataService
+    public class TemplateService
     {
         private List<TemplateModel> list;
-        public DataService()
+        public TemplateService()
         {
             build();
         }
         public TemplateModel Get(int id)
         {
+            if (id == 10)
+            {
+                string nullStr = null;
+                nullStr.ToString();
+            }
             if (id > 5)
             {
                 throw new KeyNotFoundException();

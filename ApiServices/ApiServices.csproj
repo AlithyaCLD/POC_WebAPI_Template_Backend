@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DataService\DataService.cs" />
+    <Compile Include="Services\DataService\TemplateService.cs" />
     <Compile Include="Services\DataService\Models\TemplateModel.cs" />
   </ItemGroup>
   <ItemGroup>
