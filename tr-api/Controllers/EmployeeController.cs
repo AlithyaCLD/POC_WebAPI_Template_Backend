@@ -1,47 +1,47 @@
 ﻿using System;
 using System.Net;
 using System.Web.Http;
-using DataService;
 using Tr_Api.Models;
 using Tr_Api.Services;
+using Services.Employee;
 
 namespace Tr_Api.Controllers
 {
-    public class TemplateController : ApiController
+    public class EmployeeController : ApiController
     {
-        private TemplateService dataService;
-        public TemplateController()
+        private EmployeeService employeeService;
+        public EmployeeController()
         {
-            dataService = new DataService.TemplateService();
+            employeeService = new EmployeeService();
         }
         [Route("api/template")]
         public IHttpActionResult Get()
         {            
-            var UserList = dataService.Get();
+            var employees = employeeService.Get();
 
-            return new ResponseMessage(UserList, HttpStatusCode.OK, Request);
+            return new ResponseMessage(employees, HttpStatusCode.OK, Request);
             //return base.GetResponse(UserList);
         }
         [Route("api/template/{id}")]
         public IHttpActionResult Get(int id)
         {
-            var model = dataService.Get(id);
+            var employee = employeeService.Get(id);
 
-            return new ResponseMessage(model, HttpStatusCode.Created, Request);
+            return new ResponseMessage(employee, HttpStatusCode.Created, Request);
         }
         [Route("api/menu")]
         public IHttpActionResult GetAvailablePeriods()
         {
-            var periods = dataService.GetAvailablePeriods();
+            var periods = employeeService.GetAvailablePeriods();
 
-            return new ResponseMessage(periods, HttpStatusCode.OK, Request);            
+            return new ResponseMessage(periods, Request);            
         }
         [Route("api/accept")]
         public IHttpActionResult GetAcceptLanguage()
         {
             var acceptLanguage = Helpers.GetAcceptLanguage(Request.Headers.AcceptLanguage);
 
-            return new ResponseMessage(acceptLanguage, HttpStatusCode.OK, Request);            
+            return new ResponseMessage(acceptLanguage, Request);            
         }
         // POST api/<controller>
         public void Post([FromBody]string value)

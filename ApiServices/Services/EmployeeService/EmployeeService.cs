@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataService.Models;
 
-namespace DataService
+namespace Services.Employee
 {
-    public class TemplateService
+    public class EmployeeService
     {
-        private List<TemplateModel> list;
-        public TemplateService()
+        private List<Models.Employee> list;
+        public EmployeeService()
         {
             build();
         }
-        public TemplateModel Get(int id)
+        public Models.Employee Get(int id)
         {
             if (id == 10)
             {
@@ -25,9 +21,9 @@ namespace DataService
             {
                 throw new KeyNotFoundException();
             }
-            var model = new TemplateModel();
-            model.ModelName = "This is a template model";
-            model.ModelId = id;
+            var model = new Models.Employee();
+            model.EmployeeName = "This is a template model";
+            model.EmployeeId = id;
 
             return model;
         }
@@ -41,16 +37,16 @@ namespace DataService
 
             return availablePeriods;
         }
-        public List<TemplateModel> Get()
+        public List<Models.Employee> Get()
         {
             return list;
         }
         private void build()
         {
-            list = new List<TemplateModel>();
+            list = new List<Models.Employee> ();
             for (int i = 0; i < 5; i++)
             {
-                list.Add(new TemplateModel("name " + i, i));
+                list.Add(new Models.Employee("name " + i, i));
             }
         }
     }

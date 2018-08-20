@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DataService\TemplateService.cs" />
-    <Compile Include="Services\DataService\Models\TemplateModel.cs" />
+    <Compile Include="Services\EmployeeService\EmployeeService.cs" />
+    <Compile Include="Services\EmployeeService\Models\Employee.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\Repository\" />
