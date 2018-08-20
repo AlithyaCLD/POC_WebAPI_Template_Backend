@@ -11,7 +11,7 @@ using Tr_Api.Services;
 
 namespace Tr_Api.Controllers
 {
-    public class TemplateController : ResponseController
+    public class TemplateController : ApiController
     {
         private DataService.DataService dataService;
         public TemplateController()
@@ -23,7 +23,8 @@ namespace Tr_Api.Controllers
         {            
             var UserList = dataService.Get();
 
-            return base.GetResponse(UserList);            
+            return new ResponseMessage(UserList, HttpStatusCode.OK, Request);
+            //return base.GetResponse(UserList);
         }
         [Route("api/template/{id}")]
         public IHttpActionResult Get(int id)
@@ -32,15 +33,17 @@ namespace Tr_Api.Controllers
 
             try
             {
+                return new ResponseMessage(model, HttpStatusCode.Created, Request);
+
                 //return Json(new Response(HttpStatusCode.BadRequest, model));
-                return base.GetResponse(model);
+                //return base.GetResponse(model);
                 //return Json(new { Code = 200, ErrorMessage = "Could not retrieve template." });
             }
             catch (Exception ex)
             {
-                 return base.GetResponse(Helpers.HandleException(ex), HttpStatusCode.InternalServerError);
+                return new ResponseMessage(Helpers.HandleException(ex), HttpStatusCode.InternalServerError, Request);
 
-                //return Json(new { Code = 500, ErrorMessage = "Could not retrieve template." });
+                return Json(new { Code = 500, ErrorMessage = "Could not retrieve template." });
 
             }
         }
@@ -49,14 +52,14 @@ namespace Tr_Api.Controllers
         {
             var periods = dataService.GetAvailablePeriods();
 
-            return base.GetResponse(periods);            
+            return new ResponseMessage(periods, HttpStatusCode.OK, Request);            
         }
         [Route("api/accept")]
         public IHttpActionResult GetAcceptLanguage()
         {
-            //var acceptLanguage = Helpers.GetAcceptLanguage(Request.Headers.AcceptLanguage);
+            var acceptLanguage = Helpers.GetAcceptLanguage(Request.Headers.AcceptLanguage);
 
-            return base.GetResponse(new ApiMessage(base.AcceptLanguage), HttpStatusCode.BadRequest);
+            return new ResponseMessage(acceptLanguage, HttpStatusCode.OK, Request);            
         }
         // POST api/<controller>
         public void Post([FromBody]string value)
