@@ -9,12 +9,12 @@ namespace Tr_Api.Controllers
 {
     public class EmployeeController : ApiController
     {
-        private EmployeeService employeeService;
+        private EmployeeFacade employeeService;
         public EmployeeController()
         {
-            employeeService = new EmployeeService();
+            employeeService = new EmployeeFacade();
         }
-        [Route("api/template")]
+        [Route("api/employee")]
         public IHttpActionResult Get()
         {            
             var employees = employeeService.Get();
@@ -22,7 +22,7 @@ namespace Tr_Api.Controllers
             return new ResponseMessage(employees, HttpStatusCode.OK, Request);
             //return base.GetResponse(UserList);
         }
-        [Route("api/template/{id}")]
+        [Route("api/employee/{id}")]
         public IHttpActionResult Get(int id)
         {
             var employee = employeeService.Get(id);

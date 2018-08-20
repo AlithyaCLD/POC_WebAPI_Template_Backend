@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace Services.Employee
 {
-    public class EmployeeService
+    public class EmployeeFacade
     {
         private List<Models.Employee> list;
-        public EmployeeService()
+        public EmployeeFacade()
         {
             build();
         }
